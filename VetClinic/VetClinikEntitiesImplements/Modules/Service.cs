@@ -15,8 +15,6 @@ namespace VetClinikModels.Modules
         public string ServiceName { get; set; }
         [Required]
         public string FIO { get; set; }
-        [Required]
-        public DateTime Date { get; set; }
         [ForeignKey("ServiceId")]
         public virtual List<MedicationService> MedicationsServices { get; set; }
         [ForeignKey("ServiceId")]

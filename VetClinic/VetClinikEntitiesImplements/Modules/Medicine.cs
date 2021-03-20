@@ -14,7 +14,5 @@ namespace VetClinikModels.Modules
         public string MedicineName { get; set; }
         [ForeignKey("MedicineId")]
         public virtual List<MedicationMedicine> MedicationsMedicines { get; set; }
-        //[ForeignKey("MedicineId")]
-        //public virtual List<Order> Orders { get; set; }
     }
 }
