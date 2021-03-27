@@ -10,6 +10,6 @@ namespace _VetCliniсBusinessLogic_.ViewModels
         public string ServiceName { get; set; }
         [DisplayName("ФИО врача, оказывающего услугу")]
         public string FIO { get; set; }
-        public Dictionary<int, (string, int)> Medications { get; set; }
+        public Dictionary<int, string> Medications { get; set; }
     }
 }

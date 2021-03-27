@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace _VetCliniсBusinessLogic_.BusinessLogic
 {
-    class ServiceBusinessLogic
+    public class ServiceBusinessLogic
     {
         private readonly IServiceStorage _serviceStorage;
         public ServiceBusinessLogic(IServiceStorage serviceStorage)

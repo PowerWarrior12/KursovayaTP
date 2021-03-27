@@ -8,6 +8,6 @@ namespace _VetCliniсBusinessLogic_.ViewModels
         public int Id { get; set; }
         [DisplayName("Название лекарства")]
         public string MedicineName { get; set; }
-        public Dictionary<int, (string, int)> Medications { get; set; }
+        public Dictionary<int, string> Medications { get; set; }
     }
 }

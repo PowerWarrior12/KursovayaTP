@@ -161,9 +161,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20210320102246_InitialCreate.cs" />
-    <Compile Include="Migrations\20210320102246_InitialCreate.designer.cs">
-      <DependentUpon>20210320102246_InitialCreate.cs</DependentUpon>
+    <Compile Include="Implements\MedicationStorage.cs" />
+    <Compile Include="Implements\MedicineStorage.cs" />
+    <Compile Include="Implements\ServiceStorage.cs" />
+    <Compile Include="Implements\UserStorage.cs" />
+    <Compile Include="Migrations\20210321160556_InitialCreate.cs" />
+    <Compile Include="Migrations\20210321160556_InitialCreate.designer.cs">
+      <DependentUpon>20210321160556_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\VetClinicDataBaseModelSnapshot.cs" />
     <Compile Include="Modules\DoctorVisit.cs" />
@@ -172,6 +176,7 @@
     <Compile Include="Modules\MedicationMedicine.cs" />
     <Compile Include="Modules\MedicationService.cs" />
     <Compile Include="Modules\Medicine.cs" />
+    <Compile Include="Modules\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Service.cs" />
@@ -181,6 +186,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\«VetCliniсBusinessLogic»\«VetCliniсBusinessLogic».csproj">
+      <Project>{01374093-0917-41c4-af77-c571bcc605eb}</Project>
+      <Name>«VetCliniсBusinessLogic»</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

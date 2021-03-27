@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinikEntitiesImplements
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "«VetCliniсBusinessLogic»", "«VetCliniсBusinessLogic»\«VetCliniсBusinessLogic».csproj", "{01374093-0917-41C4-AF77-C571BCC605EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinicView", "VetClinicView\VetClinicView.csproj", "{21F06702-658C-40D6-A1F4-7228FEB795DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{01374093-0917-41C4-AF77-C571BCC605EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01374093-0917-41C4-AF77-C571BCC605EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01374093-0917-41C4-AF77-C571BCC605EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21F06702-658C-40D6-A1F4-7228FEB795DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21F06702-658C-40D6-A1F4-7228FEB795DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21F06702-658C-40D6-A1F4-7228FEB795DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21F06702-658C-40D6-A1F4-7228FEB795DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -54,12 +54,25 @@ namespace VetClinikModels.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceName = table.Column<string>(nullable: false),
-                    FIO = table.Column<string>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    FIO = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Services", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Login = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,6 +196,9 @@ namespace VetClinikModels.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicationServices");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "DoctorVisits");

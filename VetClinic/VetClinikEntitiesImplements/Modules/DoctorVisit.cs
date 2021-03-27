@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VetClinikModels.Modules
+namespace VetClinikEntitiesImplements.Modules
 {
     /// <summary>
     /// Сущность посещения врача

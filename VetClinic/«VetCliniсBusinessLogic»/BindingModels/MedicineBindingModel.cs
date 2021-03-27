@@ -9,6 +9,6 @@ namespace _VetCliniсBusinessLogic_.BindingModels
     {
         public int? Id { get; set; }
         public string MedicineName { get; set; }
-        public Dictionary<int, (string, int)> Medications { get; set; }
+        public Dictionary<int, string> Medications { get; set; }
     }
 }

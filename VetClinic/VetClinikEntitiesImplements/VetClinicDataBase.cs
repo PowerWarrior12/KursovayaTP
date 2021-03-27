@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VetClinikModels.Modules;
+using VetClinikEntitiesImplements.Modules;
 
-namespace VetClinikModels
+namespace VetClinikEntitiesImplements
 {
     class VetClinicDataBase : DbContext
     {
@@ -20,5 +20,6 @@ namespace VetClinikModels
         public virtual DbSet<MedicationService> MedicationServices { set; get; }
         public virtual DbSet<DoctorVisit> DoctorVisits { set; get; }
         public virtual DbSet<DoctorVisitService> DoctorVisitServices { set; get; }
+        public virtual DbSet<User> Users { set; get; }
     }
 }

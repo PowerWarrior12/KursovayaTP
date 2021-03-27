@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VetClinikModels.Modules
+namespace VetClinikEntitiesImplements.Modules
 {
     /// <summary>
     /// Лекарство, создаётся на основе медикаментов

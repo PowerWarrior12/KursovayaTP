@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VetClinikModels.Modules
+namespace VetClinikEntitiesImplements.Modules
 {
     /// <summary>
     /// Сущность связи медикамента и лекарства
