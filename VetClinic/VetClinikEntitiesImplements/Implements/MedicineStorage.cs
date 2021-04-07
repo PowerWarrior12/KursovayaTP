@@ -29,7 +29,6 @@ namespace VetClinikEntitiesImplements.Implements
                 }
             }
         }
-
         public MedicineViewModel GetElement(MedicineBindingModel model)
         {
             if (model == null)
@@ -44,6 +43,7 @@ namespace VetClinikEntitiesImplements.Implements
                 {
                     Id = service.Id,
                     MedicineName = service.MedicineName,
+                    Cost = service.Cost,
                     Medications = service.MedicationsMedicines
                 .ToDictionary(recPC => recPC.MedicationId, recPC =>
                (recPC.Medication?.MedicationName))
@@ -69,6 +69,7 @@ namespace VetClinikEntitiesImplements.Implements
                {
                    Id = rec.Id,
                    MedicineName = rec.MedicineName,
+                   Cost = rec.Cost,
                    Medications = rec.MedicationsMedicines
                 .ToDictionary(recPC => recPC.MedicationId, recPC =>
                 (recPC.Medication?.MedicationName))
@@ -88,6 +89,7 @@ namespace VetClinikEntitiesImplements.Implements
                {
                    Id = rec.Id,
                    MedicineName = rec.MedicineName,
+                   Cost = rec.Cost,
                    Medications = rec.MedicationsMedicines
                 .ToDictionary(recPC => recPC.MedicationId, recPC =>
                 (recPC.Medication?.MedicationName))
@@ -106,6 +108,7 @@ namespace VetClinikEntitiesImplements.Implements
                         Medicine p = new Medicine
                         {
                             MedicineName = model.MedicineName,
+                            Cost = model.Cost
                         };
                         context.Medicines.Add(p);
                         context.SaveChanges();
@@ -151,6 +154,7 @@ namespace VetClinikEntitiesImplements.Implements
         private Medicine CreateModel(MedicineBindingModel model, Medicine medicine, VetClinicDataBase context)
         {
             medicine.MedicineName = model.MedicineName;
+            medicine.Cost = model.Cost;
             if (model.Id.HasValue)
             {
                 var medicineMedications = context.MedicationMedicines.Where(rec =>

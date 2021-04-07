@@ -22,13 +22,20 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Margin="5,10,0,10" Padding="3,3,3,3">C</Label>
-                <DatePicker Grid.Column="1" IsDropDownOpen="False" SelectedDateFormat="Short" Margin="10,10,10,10" Padding="3,3,3,3"></DatePicker>
+                <DatePicker x:Name="DatePickerFrom" Grid.Column="1" IsDropDownOpen="False" SelectedDateFormat="Short" Margin="10,10,10,10" Padding="3,3,3,3"></DatePicker>
                 <Label Grid.Column="2" Margin="5,10,0,10" Padding="3,3,3,3">до</Label>
-                <DatePicker Grid.Column="3" IsDropDownOpen="False" SelectedDateFormat="Short" Margin="10,10,10,10" Padding="3,3,3,3"></DatePicker>
-                <Button Grid.Column="4" Margin="10,10,10,10" Padding="3,3,3,3">Показать</Button>
-                <Button Grid.Column="5" Margin="10,10,10,10" Padding="3,3,3,3">На почту</Button>
+                <DatePicker x:Name="DatePickerTo" Grid.Column="3" IsDropDownOpen="False" SelectedDateFormat="Short" Margin="10,10,10,10" Padding="3,3,3,3"></DatePicker>
+                <Button x:Name="ButtonShow" Grid.Column="4" Margin="10,10,10,10" Padding="3,3,3,3" Click="ButtonShow_Click">Показать</Button>
+                <Button x:Name="ButtonMail" Grid.Column="5" Margin="10,10,10,10" Padding="3,3,3,3" Click="ButtonMail_Click">На почту</Button>
             </Grid>
             <Border Grid.Row="1" Margin="5,5,5,5" Padding="3,3,3,3"  BorderBrush="Black" BorderThickness="1">
+                <DataGrid x:Name="DataGridView">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn/>
+                        <DataGridTextColumn/>
+                        <DataGridTextColumn/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
         </Grid>
     </Grid>

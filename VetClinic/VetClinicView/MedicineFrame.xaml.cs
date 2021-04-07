@@ -33,7 +33,6 @@ namespace VetClinicView
                 if (medicineMedications != null)
                 {
                     SelectedMedicationsListBox.Items.Clear();
-                    //dataGridView.Columns[0].Visible = false;
                     foreach (var mm in medicineMedications)
                     {
                         SelectedMedicationsListBox.Items.Add(mm.Value);
@@ -63,7 +62,8 @@ namespace VetClinicView
                         Id = id.Value
                     })?[0];
                     medicineMedications = view.Medications;
-                    NameTextBox.Text = view.MedicineName.ToString();
+                    NameTextBox.Text = view.MedicineName;
+                    CostTextBox.Text = view.Cost.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -91,6 +91,12 @@ namespace VetClinicView
                MessageBoxImage.Error);
                 return;
             }
+            if (string.IsNullOrEmpty(CostTextBox.Text))
+            {
+                MessageBox.Show("Заполните название", "Ошибка", MessageBoxButton.OK,
+               MessageBoxImage.Error);
+                return;
+            }
             if (medicineMedications == null || medicineMedications.Count == 0)
             {
                 MessageBox.Show("Заполните компоненты", "Ошибка", MessageBoxButton.OK,
@@ -103,6 +109,7 @@ namespace VetClinicView
                 {
                     Id = id,
                     MedicineName = NameTextBox.Text,
+                    Cost = int.Parse(CostTextBox.Text),
                     Medications = medicineMedications
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK,

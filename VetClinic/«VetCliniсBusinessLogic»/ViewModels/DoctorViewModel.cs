@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace _VetCliniсBusinessLogic_.BindingModels
+namespace _VetCliniсBusinessLogic_.ViewModels
 {
-    public class UserBindingModel
+    public class DoctorViewModel
     {
         public int? Id { get; set; }
         public string Login { get; set; }
+        public string FIO { get; set; }
         public string Password { get; set; }
+        public override string ToString()
+        {
+            return FIO;
+        }
     }
 }

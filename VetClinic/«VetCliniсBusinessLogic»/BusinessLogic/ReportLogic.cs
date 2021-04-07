@@ -12,11 +12,15 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
     {
         private readonly IMedicationStorage _medicationStorage;
         private readonly IMedicineStorage _medicineStorage;
+        private readonly IVisitStorage _visitStorage;
+        private readonly IPurchaseStorage _purchaseStorage;
         public ReportLogic(IMedicationStorage medicationStorage, IMedicineStorage
-       medicineStorage)
+       medicineStorage, IVisitStorage visitStorage, IPurchaseStorage purchaseStorage)
         {
             _medicationStorage = medicationStorage;
             _medicineStorage = medicineStorage;
+            _visitStorage = visitStorage;
+            _purchaseStorage = purchaseStorage;
         }
         /// <summary>
         /// Получение списка компонент с указанием, в каких изделиях используются
@@ -52,6 +56,30 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                     }
                 }
                 list.Add(record);
+            }
+            return list;
+        }
+        public List<ReportServiceMedicineViewModel> GetServiceMedicine(ReportBindingModel model)
+        {
+            var purchaces = _purchaseStorage.GetFullList().Where(rec => rec.DatePayment > model.DateFrom && rec.DatePayment < model.DateTo);
+            var visits = _visitStorage.GetFullList().Where(rec => rec.DateVisit > model.DateFrom && rec.DateVisit < model.DateTo);
+            var list = new List<ReportServiceMedicineViewModel>();
+            foreach (var purchace in purchaces)
+            {
+                foreach (String medicine in purchace.MedicinesPurchases.Keys)
+                {
+                    var selectedvisits = visits.Where(rec => rec.DateVisit == purchace.DatePayment).ToList();
+                    foreach (var visit in selectedvisits)
+                    {
+                        var report = visit.ServicesVisits.Values.Select(s => new ReportServiceMedicineViewModel
+                        {
+                            Date = visit.DateVisit,
+                            ServiceName = s,
+                            MedicineName = medicine
+                        }).ToList();
+                        report.ForEach(rep => list.Add(rep));
+                    }
+                }
             }
             return list;
         }

@@ -1,20 +1,33 @@
 ﻿using _VetCliniсBusinessLogic_.BindingModels;
+using _VetCliniсBusinessLogic_.ViewModels;
 using _VetCliniсBusinessLogic_.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace _VetCliniсBusinessLogic_.BusinessLogic
 {
-    public class UserBusinessLogic
+    public class DoctorBusinessLogic
     {
-        private readonly IUserStorage _userStorage;
-        public UserBusinessLogic(IUserStorage userStorage)
+        private readonly IDoctorStorage _doctorStorage;
+        public DoctorBusinessLogic(IDoctorStorage userStorage)
         {
-            _userStorage = userStorage;
+            _doctorStorage = userStorage;
         }
-        public void Login(UserBindingModel model)
+        public List<DoctorViewModel> Read(DoctorBindingModel model)
         {
-            var element = _userStorage.GetElement(new UserBindingModel
+            if (model == null)
+            {
+                return _doctorStorage.GetFullList();
+            }
+            if (model.Id.HasValue)
+            {
+                return new List<DoctorViewModel> { _doctorStorage.GetElement(model) };
+            }
+            return _doctorStorage.GetFilteredList(model);
+        }
+        public void Login(DoctorBindingModel model)
+        {
+            var element = _doctorStorage.GetElement(new DoctorBindingModel
             {
                 Login = model.Login
             });
@@ -27,9 +40,9 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                 throw new Exception("Неверный пароль");
             }
         }
-        public void CreateOrUpdate(UserBindingModel model)
+        public void CreateOrUpdate(DoctorBindingModel model)
         {
-            var element = _userStorage.GetElement(new UserBindingModel
+            var element = _doctorStorage.GetElement(new DoctorBindingModel
             {
                 Login = model.Login
             });
@@ -39,16 +52,16 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
             }
             if (model.Id.HasValue)
             {
-                _userStorage.Update(model);
+                _doctorStorage.Update(model);
             }
             else
             {
-                _userStorage.Insert(model);
+                _doctorStorage.Insert(model);
             }
         }
-        public void Delete(UserBindingModel model)
+        public void Delete(DoctorBindingModel model)
         {
-            var element = _userStorage.GetElement(new UserBindingModel
+            var element = _doctorStorage.GetElement(new DoctorBindingModel
             {
                 Id =  model.Id
             });
@@ -56,7 +69,7 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
             {
                 throw new Exception("Пользователь не найден");
             }
-            _userStorage.Delete(model);
+            _doctorStorage.Delete(model);
         }
     }
 }

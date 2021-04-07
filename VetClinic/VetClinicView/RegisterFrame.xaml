@@ -15,6 +15,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75"></ColumnDefinition>
@@ -24,6 +25,8 @@
             <TextBox x:Name="LoginTextBox" Grid.Column="1" Grid.Row="0"  Margin="10,10,10,10" Padding="3,3,3,3" VerticalAlignment="Center"></TextBox>
             <Label Grid.Column="0" Grid.Row="1" Margin="10,10,10,10" Padding="3,3,3,3" VerticalAlignment="Center">Пароль:</Label>
             <TextBox x:Name="PasswordTextBox" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" Padding="3,3,3,3" VerticalAlignment="Center"></TextBox>
+            <Label Grid.Column="0" Grid.Row="2" Margin="10,10,10,10" Padding="3,3,3,3" VerticalAlignment="Center">ФИО:</Label>
+            <TextBox x:Name="FIOTextBox" Grid.Column="1" Grid.Row="2" Margin="10,10,10,10" Padding="3,3,3,3" VerticalAlignment="Center"></TextBox>
         </Grid>
         <Grid Grid.Row="1" RenderTransformOrigin="0.24,0.487">
             <Grid.RowDefinitions>

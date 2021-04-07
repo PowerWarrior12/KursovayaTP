@@ -18,13 +18,15 @@ namespace VetClinicView
         public int Id { set { id = value; } }
         private readonly ServiceBusinessLogic servic_logic;
         private readonly MedicationBusinessLogic medication_logic;
+        private readonly DoctorBusinessLogic doctor_logic;
         private int? id;
         private Dictionary<int, string> serviceMedications;
-        public ServiceFrame(ServiceBusinessLogic servic_logic, MedicationBusinessLogic medication_logic)
+        public ServiceFrame(ServiceBusinessLogic servic_logic, MedicationBusinessLogic medication_logic, DoctorBusinessLogic doctor_logic)
         {
             InitializeComponent();
             this.servic_logic = servic_logic;
             this.medication_logic = medication_logic;
+            this.doctor_logic = doctor_logic;
         }
         private void LoadData()
         {
@@ -33,7 +35,6 @@ namespace VetClinicView
                 if (serviceMedications != null)
                 {
                     SelectedMedicationsListBox.Items.Clear();
-                    //dataGridView.Columns[0].Visible = false;
                     foreach (var mm in serviceMedications)
                     {
                         SelectedMedicationsListBox.Items.Add(mm.Value);
@@ -61,9 +62,9 @@ namespace VetClinicView
                MessageBoxImage.Error);
                 return;
             }
-            if (string.IsNullOrEmpty(FIOTextBox.Text))
+            if (string.IsNullOrEmpty(CostTextBox.Text))
             {
-                MessageBox.Show("Укажите врача", "Ошибка", MessageBoxButton.OK,
+                MessageBox.Show("Укажите цену", "Ошибка", MessageBoxButton.OK,
                MessageBoxImage.Error);
                 return;
             }
@@ -73,13 +74,20 @@ namespace VetClinicView
                MessageBoxImage.Error);
                 return;
             }
+            if (FIOComboBox.SelectedItem == null) 
+            {
+                MessageBox.Show("Укажите врача", "Ошибка", MessageBoxButton.OK,
+   MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 servic_logic.CreateOrUpdate(new ServiceBindingModel
                 {
                     Id = id,
                     ServiceName = NameTextBox.Text,
-                    FIO = FIOTextBox.Text,
+                    DoctorId = (int)((DoctorViewModel)FIOComboBox.SelectedItem).Id,
+                    Cost = int.Parse(CostTextBox.Text),
                     Medications = serviceMedications
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK,
@@ -121,6 +129,8 @@ namespace VetClinicView
 
         private void ServiceFrame_Load(object sender, RoutedEventArgs e)
         {
+            var FIOsource = doctor_logic.Read(null);
+            FIOComboBox.ItemsSource = FIOsource;
             if (id.HasValue)
             {
                 try
@@ -130,8 +140,9 @@ namespace VetClinicView
                         Id = id.Value
                     })?[0];
                     serviceMedications = view.Medications;
-                    NameTextBox.Text = view.ServiceName.ToString();
-                    FIOTextBox.Text = view.FIO.ToString();
+                    NameTextBox.Text = view.ServiceName;
+                    CostTextBox.Text = view.Cost.ToString();
+                    FIOComboBox.SelectedIndex = FIOsource.IndexOf(FIOsource.FirstOrDefault(d => d.FIO == view.FIO));
                 }
                 catch (Exception ex)
                 {

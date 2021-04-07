@@ -3,9 +3,9 @@
     /// <summary>
     /// Добавление услуги к посещению врача
     /// </summary>
-    public class AddServiceToDoctorVisitBindingModel
+    public class AddServiceToVisitBindingModel
     {
         public int DoctorVisitId { get; set; }
-        public int ServiceId { get; set; }
+        public ServiceBindingModel Service { get; set; }
     }
 }

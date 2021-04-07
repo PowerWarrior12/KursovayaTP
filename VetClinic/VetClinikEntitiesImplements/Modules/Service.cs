@@ -12,12 +12,15 @@ namespace VetClinikEntitiesImplements.Modules
     {
         public int Id { get; set; }
         [Required]
+        public int DoctorId { get; set; }
+        [Required]
         public string ServiceName { get; set; }
         [Required]
-        public string FIO { get; set; }
+        public int Cost { get; set; }
         [ForeignKey("ServiceId")]
         public virtual List<MedicationService> MedicationsServices { get; set; }
         [ForeignKey("ServiceId")]
-        public virtual List<DoctorVisitService> DoctorVisitsServices { get; set; }
+        public virtual List<VisitService> VisitsServices { get; set; }
+        public virtual Doctor Doctor { get; set; }
     }
 }

@@ -12,6 +12,8 @@ namespace VetClinikEntitiesImplements.Modules
         public int Id { get; set; }
         [Required]
         public string MedicineName { get; set; }
+        [Required]
+        public int Cost { get; set; }
         [ForeignKey("MedicineId")]
         public virtual List<MedicationMedicine> MedicationsMedicines { get; set; }
     }

@@ -19,45 +19,66 @@ namespace VetClinikModels.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.DoctorVisit", b =>
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Animal", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClientFIO")
+                    b.Property<string>("AnimalName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
-                    b.ToTable("DoctorVisits");
+                    b.ToTable("Animals");
                 });
 
-            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.DoctorVisitService", b =>
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.AnimalVisit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DoctorVisitId")
+                    b.Property<int>("AnimalId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ServiceId")
+                    b.Property<int>("VisitId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorVisitId");
+                    b.HasIndex("AnimalId");
 
-                    b.HasIndex("ServiceId");
+                    b.HasIndex("VisitId");
 
-                    b.ToTable("DoctorVisitServices");
+                    b.ToTable("AnimalVisits");
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Doctor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Medication", b =>
@@ -133,6 +154,9 @@ namespace VetClinikModels.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
                     b.Property<string>("MedicineName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -142,6 +166,56 @@ namespace VetClinikModels.Migrations
                     b.ToTable("Medicines");
                 });
 
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.MedicinePurchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PurchaseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PurchaseId");
+
+                    b.ToTable("MedicinePurchases");
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Purchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatePayment")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Sum")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("VisitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("VisitId");
+
+                    b.ToTable("Purchases");
+                });
+
             modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -149,9 +223,11 @@ namespace VetClinikModels.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FIO")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ServiceName")
                         .IsRequired()
@@ -159,40 +235,59 @@ namespace VetClinikModels.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorId");
+
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.User", b =>
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Visit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateVisit")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Visits");
                 });
 
-            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.DoctorVisitService", b =>
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.VisitService", b =>
                 {
-                    b.HasOne("VetClinikEntitiesImplements.Modules.DoctorVisit", "DoctorVisit")
-                        .WithMany("DoctorVisitsServices")
-                        .HasForeignKey("DoctorVisitId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VisitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("VisitId");
+
+                    b.ToTable("VisitServices");
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.AnimalVisit", b =>
+                {
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VetClinikEntitiesImplements.Modules.Service", "Service")
-                        .WithMany("DoctorVisitsServices")
-                        .HasForeignKey("ServiceId")
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Visit", null)
+                        .WithMany("AnimalsVisits")
+                        .HasForeignKey("VisitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -223,6 +318,58 @@ namespace VetClinikModels.Migrations
                     b.HasOne("VetClinikEntitiesImplements.Modules.Service", "Service")
                         .WithMany("MedicationsServices")
                         .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.MedicinePurchase", b =>
+                {
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Purchase", null)
+                        .WithMany("MedicinesPurchases")
+                        .HasForeignKey("PurchaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Purchase", b =>
+                {
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Animal", "Animal")
+                        .WithMany("Purchases")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Visit", null)
+                        .WithMany("Purchases")
+                        .HasForeignKey("VisitId");
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.Service", b =>
+                {
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Doctor", "Doctor")
+                        .WithMany("Services")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VetClinikEntitiesImplements.Modules.VisitService", b =>
+                {
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Service", "Service")
+                        .WithMany("VisitsServices")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetClinikEntitiesImplements.Modules.Visit", "Visit")
+                        .WithMany("VisitServices")
+                        .HasForeignKey("VisitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

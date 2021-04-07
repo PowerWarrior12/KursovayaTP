@@ -13,8 +13,8 @@ namespace VetClinicView
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        private readonly UserBusinessLogic logic;
-        public RegisterFrame(UserBusinessLogic logic)
+        private readonly DoctorBusinessLogic logic;
+        public RegisterFrame(DoctorBusinessLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -32,13 +32,19 @@ namespace VetClinicView
                 MessageBox.Show("Введите логин", "Ошибка");
                 return;
             }
+            if (string.IsNullOrEmpty(FIOTextBox.Text))
+            {
+                MessageBox.Show("Введите ФИО", "Ошибка");
+                return;
+            }
             try
             {
-                logic.CreateOrUpdate(new UserBindingModel
+                logic.CreateOrUpdate(new DoctorBindingModel
                 {
                     Id = null,
                     Login = LoginTextBox.Text,
                     Password = PasswordTextBox.Text,
+                    FIO = FIOTextBox.Text
                 });
                 MessageBox.Show("Регистрация прошла успешно", "Сообщение");
                 var form = Container.Resolve<MainFrame>();

@@ -43,8 +43,9 @@ namespace VetClinikEntitiesImplements.Implements
                 new ServiceViewModel
                 {
                     Id = service.Id,
-                    FIO = service.FIO,
                     ServiceName = service.ServiceName,
+                    Cost = service.Cost,
+                    FIO = context.Doctors.FirstOrDefault(doc => doc.Id == service.DoctorId).FIO,
                     Medications = service.MedicationsServices
                 .ToDictionary(recPC => recPC.MedicationId, recPC =>
                (recPC.Medication?.MedicationName))
@@ -69,8 +70,9 @@ namespace VetClinikEntitiesImplements.Implements
                .Select(rec => new ServiceViewModel
                {
                    Id = rec.Id,
-                   FIO = rec.FIO,
                    ServiceName = rec.ServiceName,
+                   Cost = rec.Cost,
+                   FIO = context.Doctors.FirstOrDefault(doc => doc.Id == rec.DoctorId).FIO,
                    Medications = rec.MedicationsServices
                 .ToDictionary(recPC => recPC.MedicationId, recPC =>
                 (recPC.Medication?.MedicationName))
@@ -89,8 +91,9 @@ namespace VetClinikEntitiesImplements.Implements
                .Select(rec => new ServiceViewModel
                {
                    Id = rec.Id,
-                   FIO = rec.FIO,
                    ServiceName = rec.ServiceName,
+                   Cost = rec.Cost,
+                   FIO = context.Doctors.FirstOrDefault(doc => doc.Id == rec.DoctorId).FIO,
                    Medications = rec.MedicationsServices
                 .ToDictionary(recPC => recPC.MedicationId, recPC =>
                 (recPC.Medication?.MedicationName))
@@ -109,7 +112,8 @@ namespace VetClinikEntitiesImplements.Implements
                         Service p = new Service
                         {
                             ServiceName = model.ServiceName,
-                            FIO = model.FIO
+                            Cost = model.Cost,
+                            DoctorId = model.DoctorId
                         };
                         context.Services.Add(p);
                         context.SaveChanges();
@@ -155,7 +159,8 @@ namespace VetClinikEntitiesImplements.Implements
         private Service CreateModel(ServiceBindingModel model, Service service, VetClinicDataBase context)
         {
             service.ServiceName = model.ServiceName;
-            service.FIO = model.FIO;
+            service.DoctorId = model.DoctorId;
+            service.Cost = model.Cost;
             if (model.Id.HasValue)
             {
                 var serviceMedications = context.MedicationServices.Where(rec =>

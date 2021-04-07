@@ -13,8 +13,8 @@ namespace VetClinicView
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
-        private readonly UserBusinessLogic logic;
-        public LoginFrame(UserBusinessLogic logic)
+        private readonly DoctorBusinessLogic logic;
+        public LoginFrame(DoctorBusinessLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -34,7 +34,7 @@ namespace VetClinicView
             }
             try
             {
-                logic.Login(new UserBindingModel
+                logic.Login(new DoctorBindingModel
                 {
                     Id = null,
                     Login = LoginTextBox.Text,

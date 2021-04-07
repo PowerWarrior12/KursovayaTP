@@ -13,7 +13,7 @@
             <MenuItem x:Name="ServiceItem" Header="Услуги" Click="ServiceItem_Click"></MenuItem>
             <MenuItem x:Name="MedicineListItem" Header="Получение списка лекарств" Click="MedicineListItem_Click"></MenuItem>
             <MenuItem x:Name="MedicineServiceReportItem" Header="Получение отчёта по лекарствам и услугам" Click="MedicineServiceReportItem_Click"></MenuItem>
-            <MenuItem Foreground="Red" Header="Рекомендации"></MenuItem>
+            <MenuItem x:Name="AddServiceToVisitItem" Header="Привязать услугу" Click="AddServiceToVisitItem_Click"></MenuItem>
         </Menu>
         <Label VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</Label>
     </Grid>

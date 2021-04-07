@@ -2,12 +2,13 @@
 
 namespace VetClinikEntitiesImplements.Modules
 {
-    public class User
+    public class AnimalVisit
     {
         public int Id { get; set; }
         [Required]
-        public string Login { get; set; }
+        public int AnimalId { get; set; }
         [Required]
-        public string Password { get; set; }
+        public int VisitId { get; set; }
+        public virtual Animal Animal { get; set; }
     }
 }

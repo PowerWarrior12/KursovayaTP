@@ -25,15 +25,21 @@ namespace VetClinicView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMedicineStorage, MedicineStorage>(new
            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IUserStorage, UserStorage>(new
+            currentContainer.RegisterType<IDoctorStorage, DoctorStorage>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IServiceStorage, ServiceStorage>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IVisitStorage, VisitStorage>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IPurchaseStorage, PurchaseStorage>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MedicationBusinessLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MedicineBusinessLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ServiceBusinessLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<UserBusinessLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<DoctorBusinessLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<VisitBusinessLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<PurchaseLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

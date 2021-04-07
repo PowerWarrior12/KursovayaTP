@@ -9,7 +9,7 @@ namespace VetClinikEntitiesImplements
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=POWERWARRIOR-ПК\SQLEXPRESS01;Initial Catalog=VetClinic;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=POWERWARRIOR\SQLEXPRESS01;Initial Catalog=VetClinic;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -18,8 +18,13 @@ namespace VetClinikEntitiesImplements
         public virtual DbSet<MedicationMedicine> MedicationMedicines { set; get; }
         public virtual DbSet<Service> Services { set; get; }
         public virtual DbSet<MedicationService> MedicationServices { set; get; }
-        public virtual DbSet<DoctorVisit> DoctorVisits { set; get; }
-        public virtual DbSet<DoctorVisitService> DoctorVisitServices { set; get; }
-        public virtual DbSet<User> Users { set; get; }
+        public virtual DbSet<Visit> Visits { set; get; }
+        public virtual DbSet<VisitService> VisitServices { set; get; }
+        public virtual DbSet<Doctor> Doctors { set; get; }
+        public virtual DbSet<Animal> Animals { set; get; }
+        public virtual DbSet<AnimalVisit> AnimalVisits { set; get; }
+        public virtual DbSet<Purchase> Purchases { set; get; }
+        public virtual DbSet<MedicinePurchase> MedicinePurchases { set; get; }
+        public virtual DbSet<AnimalPurchase> AnimalPurchases { set; get; }
     }
 }

@@ -44,7 +44,14 @@ namespace VetClinicView
 
         private void MedicineServiceReportItem_Click(object sender, RoutedEventArgs e)
         {
+            var form = Container.Resolve<OrderReportFrame>();
+            form.ShowDialog();
+        }
 
+        private void AddServiceToVisitItem_Click(object sender, RoutedEventArgs e)
+        {
+            var form = Container.Resolve<AddServiceToVisitFrame>();
+            form.ShowDialog();
         }
     }
 }

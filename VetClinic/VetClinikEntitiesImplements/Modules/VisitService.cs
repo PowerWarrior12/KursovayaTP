@@ -5,13 +5,13 @@ namespace VetClinikEntitiesImplements.Modules
     /// <summary>
     /// Сущность связи посещения врача и услуги
     /// </summary>
-    public class DoctorVisitService
+    public class VisitService
     {
         public int Id { get; set; }
         public int ServiceId { get; set; }
-        public int DoctorVisitId { get; set; }
+        public int VisitId { get; set; }
         [Required]
-        public virtual DoctorVisit DoctorVisit { get; set; }
+        public virtual Visit Visit { get; set; }
         public virtual Service Service { get; set; }
     }
 }
