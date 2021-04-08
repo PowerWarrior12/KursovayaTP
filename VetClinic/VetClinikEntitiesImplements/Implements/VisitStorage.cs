@@ -89,13 +89,13 @@ namespace VetClinikEntitiesImplements.Implements
         {
             if (model.Id.HasValue)
             {
-                var visitAnimals = context.AnimalVisits.Where(rec => rec.VisitId == model.Id.Value).ToList();
-                var visitServices = context.VisitServices.Where(rec => rec.VisitId == model.Id.Value).ToList();
+                var visitAnimals = context.AnimalsVisits.Where(rec => rec.VisitId == model.Id.Value).ToList();
+                var visitServices = context.VisitsServices.Where(rec => rec.VisitId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.AnimalVisits.RemoveRange(visitAnimals.Where(rec => !model.AnimalsVisits.ContainsKey((int)context.Animals.FirstOrDefault(recAN => recAN.Id == rec.AnimalId).Id)).ToList());
+                context.AnimalsVisits.RemoveRange(visitAnimals.Where(rec => !model.AnimalsVisits.ContainsKey((int)context.Animals.FirstOrDefault(recAN => recAN.Id == rec.AnimalId).Id)).ToList());
                 context.SaveChanges();
                 // удалить услуги, которых нет в модели
-                context.VisitServices.RemoveRange(visitServices.Where(rec => !model.ServicesVisits.ContainsKey((int)context.Services.FirstOrDefault(recAN => recAN.Id == rec.ServiceId).Id)).ToList());
+                context.VisitsServices.RemoveRange(visitServices.Where(rec => !model.ServicesVisits.ContainsKey((int)context.Services.FirstOrDefault(recAN => recAN.Id == rec.ServiceId).Id)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
                 foreach (var updateAnimal in visitAnimals)
@@ -111,7 +111,7 @@ namespace VetClinikEntitiesImplements.Implements
             // добавили новые
             foreach (var av in model.AnimalsVisits)
             {
-                context.AnimalVisits.Add(new AnimalVisit
+                context.AnimalsVisits.Add(new AnimalVisit
                 {
                     AnimalId = (int)context.Animals.FirstOrDefault(rec => rec.Id == av.Key).Id,
                     VisitId = visit.Id
@@ -120,7 +120,7 @@ namespace VetClinikEntitiesImplements.Implements
             }
             foreach (var av in model.ServicesVisits)
             {
-                context.VisitServices.Add(new VisitService
+                context.VisitsServices.Add(new VisitService
                 {
                     ServiceId = (int)context.Services.FirstOrDefault(rec => rec.Id == av.Key).Id,
                     VisitId = visit.Id

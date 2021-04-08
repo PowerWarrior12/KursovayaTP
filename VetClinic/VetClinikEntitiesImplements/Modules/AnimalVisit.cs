@@ -10,5 +10,6 @@ namespace VetClinikEntitiesImplements.Modules
         [Required]
         public int VisitId { get; set; }
         public virtual Animal Animal { get; set; }
+        public virtual Visit Visit { get; set; }
     }
 }

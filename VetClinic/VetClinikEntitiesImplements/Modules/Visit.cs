@@ -14,8 +14,6 @@ namespace VetClinikEntitiesImplements.Modules
         [Required]
         public DateTime DateVisit { get; set; }
         [ForeignKey("VisitId")]
-        public virtual List<Purchase> Purchases { get; set; }
-        [ForeignKey("VisitId")]
         public virtual List<AnimalVisit> AnimalsVisits { get; set; }
         [ForeignKey("VisitId")]
         public virtual List<VisitService> VisitServices { get; set; }

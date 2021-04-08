@@ -9,8 +9,6 @@ namespace VetClinikEntitiesImplements.Modules
     {
         public int Id { get; set; }
         [Required]
-        public int AnimalId { get; set; }
-        [Required]
         public decimal Sum { get; set; }
         public DateTime DatePayment { get; set; }
         [ForeignKey("PurchaseId")]

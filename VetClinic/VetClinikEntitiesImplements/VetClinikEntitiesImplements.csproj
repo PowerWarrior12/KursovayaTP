@@ -167,14 +167,15 @@
     <Compile Include="Implements\ServiceStorage.cs" />
     <Compile Include="Implements\DoctorStorage.cs" />
     <Compile Include="Implements\VisitStorage.cs" />
-    <Compile Include="Migrations\20210406135806_InitialCreate.cs" />
-    <Compile Include="Migrations\20210406135806_InitialCreate.designer.cs">
-      <DependentUpon>20210406135806_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20210408134948_InitialCreate.cs" />
+    <Compile Include="Migrations\20210408134948_InitialCreate.designer.cs">
+      <DependentUpon>20210408134948_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\VetClinicDataBaseModelSnapshot.cs" />
     <Compile Include="Modules\Animal.cs" />
     <Compile Include="Modules\AnimalPurchase.cs" />
     <Compile Include="Modules\AnimalVisit.cs" />
+    <Compile Include="Modules\User.cs" />
     <Compile Include="Modules\Visit.cs" />
     <Compile Include="Modules\VisitService.cs" />
     <Compile Include="Modules\Medication.cs" />

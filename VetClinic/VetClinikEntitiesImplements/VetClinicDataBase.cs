@@ -15,16 +15,16 @@ namespace VetClinikEntitiesImplements
         }
         public virtual DbSet<Medication> Medications { set; get; }
         public virtual DbSet<Medicine> Medicines { set; get; }
-        public virtual DbSet<MedicationMedicine> MedicationMedicines { set; get; }
+        public virtual DbSet<MedicationMedicine> MedicationsMedicines { set; get; }
         public virtual DbSet<Service> Services { set; get; }
-        public virtual DbSet<MedicationService> MedicationServices { set; get; }
+        public virtual DbSet<MedicationService> MedicationsServices { set; get; }
         public virtual DbSet<Visit> Visits { set; get; }
-        public virtual DbSet<VisitService> VisitServices { set; get; }
+        public virtual DbSet<VisitService> VisitsServices { set; get; }
         public virtual DbSet<Doctor> Doctors { set; get; }
         public virtual DbSet<Animal> Animals { set; get; }
-        public virtual DbSet<AnimalVisit> AnimalVisits { set; get; }
+        public virtual DbSet<AnimalVisit> AnimalsVisits { set; get; }
         public virtual DbSet<Purchase> Purchases { set; get; }
-        public virtual DbSet<MedicinePurchase> MedicinePurchases { set; get; }
-        public virtual DbSet<AnimalPurchase> AnimalPurchases { set; get; }
+        public virtual DbSet<MedicinePurchase> MedicinesPurchases { set; get; }
+        public virtual DbSet<AnimalPurchase> AnimalsPurchases { set; get; }
     }
 }

@@ -34,7 +34,7 @@ namespace VetClinicView
                     CanSelectedMedicationsListBox.Items.Clear();
                     foreach (var m in medication_logic.Read(null))
                     {
-                        CanSelectedMedicationsListBox.Items.Add(m.MedicationName);
+                        CanSelectedMedicationsListBox.Items.Add(m);
                     }
                 }
             }
@@ -51,12 +51,12 @@ namespace VetClinicView
             {
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    List<String> selected_medications = new List<string>();
+                    List<int> selected_medications = new List<int>();
                     foreach (var item in CanSelectedMedicationsListBox.SelectedItems)
                     {
-                        selected_medications.Add(item.ToString());
+                        selected_medications.Add(((MedicationViewModel)item).Id);
                     }
-                    report_logic.SaveComponentsToWordFile(new ReportBindingModel { FileName = dialog.FileName, Medications = selected_medications });
+                    report_logic.SavePurchasesToWordFile(new ReportBindingModel { FileName = dialog.FileName, Medications = selected_medications });
                     System.Windows.MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK,
                MessageBoxImage.Information);
                 }
@@ -69,12 +69,12 @@ namespace VetClinicView
             {
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    List<String> selected_medications = new List<string>();
+                    List<int> selected_medications = new List<int>();
                     foreach (var item in CanSelectedMedicationsListBox.SelectedItems)
                     {
-                        selected_medications.Add(item.ToString());
+                        selected_medications.Add(((MedicationViewModel)item).Id);
                     }
-                    report_logic.SaveDishComponentToExcelFile(new ReportBindingModel { FileName = dialog.FileName, Medications = selected_medications });
+                    report_logic.SavePurchasesToExcelFile(new ReportBindingModel { FileName = dialog.FileName, Medications = selected_medications });
                     System.Windows.MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK,
                MessageBoxImage.Information);
                 }

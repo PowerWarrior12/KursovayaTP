@@ -157,10 +157,10 @@ namespace VetClinikEntitiesImplements.Implements
             medicine.Cost = model.Cost;
             if (model.Id.HasValue)
             {
-                var medicineMedications = context.MedicationMedicines.Where(rec =>
+                var medicineMedications = context.MedicationsMedicines.Where(rec =>
                rec.MedicineId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.MedicationMedicines.RemoveRange(medicineMedications.Where(rec =>
+                context.MedicationsMedicines.RemoveRange(medicineMedications.Where(rec =>
                !model.Medications.ContainsKey(rec.MedicationId)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
@@ -173,7 +173,7 @@ namespace VetClinikEntitiesImplements.Implements
             // добавили новые
             foreach (var pc in model.Medications)
             {
-                context.MedicationMedicines.Add(new MedicationMedicine
+                context.MedicationsMedicines.Add(new MedicationMedicine
                 {
                     MedicineId = medicine.Id,
                     MedicationId = pc.Key,

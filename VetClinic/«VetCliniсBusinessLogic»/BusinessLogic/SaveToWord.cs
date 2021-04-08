@@ -64,7 +64,7 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                         docBody.AppendChild(CreateParagraph(new WordParagraph
                         {
                             Texts = new List<(string, WordTextProperties)> {
-                                (medicineMedication.MedicineName, new WordTextProperties {Bold = true, Size = "24", }) ,
+                                ("Id покупки : " + medicineMedication.PurchaseId + ", сумма покупки : " + medicineMedication.Sum + ", дата покупки : " + medicineMedication.Date, new WordTextProperties {Bold = true, Size = "24", }) ,
                                 (" : \n", new WordTextProperties {Bold = false, Size = "24", })},
                             TextProperties = new WordTextProperties
                             {

@@ -36,6 +36,7 @@ namespace VetClinicView
                 if (order != null)
                 {
                     DataGridView.Items.Clear();
+                    DataGridView.ItemsSource = order;
                     foreach (var elem in order)
                     {
                         DataGridView.Items.Add(elem);

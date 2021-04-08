@@ -26,18 +26,23 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
         /// Получение списка компонент с указанием, в каких изделиях используются
         /// </summary>
         /// <returns></returns>
-        public List<ReportMedicineMedicationViewModel> GetMedicineMedication(ReportBindingModel model)
+        public List<ReportMedicineMedicationViewModel> GetPurchasesMedication(ReportBindingModel model)
         {
             var medications = _medicationStorage.GetFullList();
+            var purchases = _purchaseStorage.GetFullList();
             var medicines = _medicineStorage.GetFullList();
             var list = new List<ReportMedicineMedicationViewModel>();
-            foreach (var medicine in medicines)
+            foreach (var purchase in purchases)
             {
                 bool have_medications = true;
-                foreach (String medication in model.Medications) {
-                    if (medicine.Medications.Values.FirstOrDefault(rec => rec == medication) == null) 
+                foreach (int medication in model.Medications) 
+                {
+                    foreach (var medicine in purchase.MedicinesPurchases)
                     {
-                        have_medications = false;
+                        if (!medicines.FirstOrDefault(rec => rec.MedicineName == medicine.Key).Medications.ContainsKey(medication))
+                        {
+                            have_medications = false;
+                        }
                     }
                 }
                 if (!have_medications)
@@ -45,16 +50,11 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
 
                 var record = new ReportMedicineMedicationViewModel
                 {
-                    MedicineName = medicine.MedicineName,
+                    PurchaseId = purchase.Id,
+                    Date = purchase.DatePayment,
+                    Sum = purchase.Sum,
                     Medications = new List<string>()
                 };
-                foreach (var medication in medications)
-                {
-                    if (medicine.Medications.ContainsKey(medication.Id))
-                    {
-                        record.Medications.Add(medication.MedicationName);
-                    }
-                }
                 list.Add(record);
             }
             return list;
@@ -68,12 +68,12 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
             {
                 foreach (String medicine in purchace.MedicinesPurchases.Keys)
                 {
-                    var selectedvisits = visits.Where(rec => rec.DateVisit == purchace.DatePayment).ToList();
+                    var selectedvisits = visits.Where(rec => rec.DateVisit.Date == purchace.DatePayment.Date).ToList();
                     foreach (var visit in selectedvisits)
                     {
                         var report = visit.ServicesVisits.Values.Select(s => new ReportServiceMedicineViewModel
                         {
-                            Date = visit.DateVisit,
+                            Date = visit.DateVisit.Date,
                             ServiceName = s,
                             MedicineName = medicine
                         }).ToList();
@@ -87,28 +87,28 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
         /// Сохранение компонент в файл-Word
         /// </summary>
         /// <param name="model"></param>
-        public void SaveComponentsToWordFile(ReportBindingModel model)
+        public void SavePurchasesToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordExelInfo
             {
                 FileName = model.FileName,
-                Title = "Список лекарств",
-                MedicineMedications = GetMedicineMedication(model),
-                NeededMedications = model.Medications
+                Title = "Список покупок на основе выбранных медикаментов",
+                MedicineMedications = GetPurchasesMedication(model),
+                NeededMedications = _medicationStorage.GetFullList().Where(rec => model.Medications.Contains(rec.Id)).Select(rec => rec.MedicationName).ToList()
             });
         }
         /// <summary>
         /// Сохранение компонент с указаеним продуктов в файл-Excel
         /// </summary>
         /// <param name="model"></param>
-        public void SaveDishComponentToExcelFile(ReportBindingModel model)
+        public void SavePurchasesToExcelFile(ReportBindingModel model)
         {
             SaveToExcel.CreateDoc(new WordExelInfo
             {
                 FileName = model.FileName,
-                Title = "Список лекарств",
-                MedicineMedications = GetMedicineMedication(model),
-                NeededMedications = model.Medications
+                Title = "Список покупок на основе выбранных медикаментов",
+                MedicineMedications = GetPurchasesMedication(model),
+                NeededMedications = _medicationStorage.GetFullList().Where(rec => model.Medications.Contains(rec.Id)).Select(rec => rec.MedicationName).ToList()
             });
         }
     }
