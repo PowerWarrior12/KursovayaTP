@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Title="Главное меню" Height="450" Width="800">
     <Grid>
-        <Menu Height="25" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="342*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Height="25" VerticalAlignment="Top" Grid.ColumnSpan="3">
             <MenuItem x:Name="MedicationItem" Margin="3" Header="Медикаменты" Click="MedicationItem_Click"/>
             <MenuItem x:Name="MedicineItem" Header="Лекарства" Click="MedicineItem_Click"></MenuItem>
             <MenuItem x:Name="ServiceItem" Header="Услуги" Click="ServiceItem_Click"></MenuItem>
@@ -15,6 +20,6 @@
             <MenuItem x:Name="MedicineServiceReportItem" Header="Получение отчёта по лекарствам и услугам" Click="MedicineServiceReportItem_Click"></MenuItem>
             <MenuItem x:Name="AddServiceToVisitItem" Header="Привязать услугу" Click="AddServiceToVisitItem_Click"></MenuItem>
         </Menu>
-        <Label VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</Label>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Margin="260,196,368,197">Логотип</Label>
     </Grid>
 </Window>

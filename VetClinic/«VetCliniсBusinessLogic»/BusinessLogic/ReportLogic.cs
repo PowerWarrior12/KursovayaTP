@@ -26,12 +26,12 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
         /// Получение списка компонент с указанием, в каких изделиях используются
         /// </summary>
         /// <returns></returns>
-        public List<ReportMedicineMedicationViewModel> GetPurchasesMedication(ReportBindingModel model)
+        public List<ReportPurchaseMedicationViewModel> GetPurchasesMedication(ReportBindingModel model)
         {
             var medications = _medicationStorage.GetFullList();
             var purchases = _purchaseStorage.GetFullList();
             var medicines = _medicineStorage.GetFullList();
-            var list = new List<ReportMedicineMedicationViewModel>();
+            var list = new List<ReportPurchaseMedicationViewModel>();
             foreach (var purchase in purchases)
             {
                 bool have_medications = true;
@@ -39,7 +39,7 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                 {
                     foreach (var medicine in purchase.MedicinesPurchases)
                     {
-                        if (!medicines.FirstOrDefault(rec => rec.MedicineName == medicine.Key).Medications.ContainsKey(medication))
+                        if (!medicines.FirstOrDefault(rec => rec.Id == medicine.Key).Medications.ContainsKey(medication))
                         {
                             have_medications = false;
                         }
@@ -47,13 +47,11 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                 }
                 if (!have_medications)
                     continue;
-
-                var record = new ReportMedicineMedicationViewModel
+                var record = new ReportPurchaseMedicationViewModel
                 {
                     PurchaseId = purchase.Id,
                     Date = purchase.DatePayment,
                     Sum = purchase.Sum,
-                    Medications = new List<string>()
                 };
                 list.Add(record);
             }
@@ -61,12 +59,19 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
         }
         public List<ReportServiceMedicineViewModel> GetServiceMedicine(ReportBindingModel model)
         {
-            var purchaces = _purchaseStorage.GetFullList().Where(rec => rec.DatePayment > model.DateFrom && rec.DatePayment < model.DateTo);
-            var visits = _visitStorage.GetFullList().Where(rec => rec.DateVisit > model.DateFrom && rec.DateVisit < model.DateTo);
+            var purchaces = _purchaseStorage.GetFilteredList(new PurchaseBindingModel { 
+                DateFrom = model.DateFrom,
+                DateTo = model.DateTo
+            });
+            var visits = _visitStorage.GetFilteredList(new VisitBindingModel
+            {
+                DateFrom = model.DateFrom,
+                DateTo = model.DateTo
+            });
             var list = new List<ReportServiceMedicineViewModel>();
             foreach (var purchace in purchaces)
             {
-                foreach (String medicine in purchace.MedicinesPurchases.Keys)
+                foreach (var medicine in purchace.MedicinesPurchases)
                 {
                     var selectedvisits = visits.Where(rec => rec.DateVisit.Date == purchace.DatePayment.Date).ToList();
                     foreach (var visit in selectedvisits)
@@ -75,7 +80,8 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                         {
                             Date = visit.DateVisit.Date,
                             ServiceName = s,
-                            MedicineName = medicine
+                            MedicineName = medicine.Value.Item1,
+                            MedicineCount = medicine.Value.Item2
                         }).ToList();
                         report.ForEach(rep => list.Add(rep));
                     }
@@ -109,6 +115,17 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                 Title = "Список покупок на основе выбранных медикаментов",
                 MedicineMedications = GetPurchasesMedication(model),
                 NeededMedications = _medicationStorage.GetFullList().Where(rec => model.Medications.Contains(rec.Id)).Select(rec => rec.MedicationName).ToList()
+            });
+        }
+        public void SaveOrderToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            { 
+                FileName = model.FileName,
+                DateFrom = (DateTime)model.DateFrom,
+                DateTo = (DateTime)model.DateTo,
+                Title = "Отчёт",
+                ServicesMedicines = GetServiceMedicine(model)
             });
         }
     }

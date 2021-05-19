@@ -19,7 +19,7 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
             {
                 return _doctorStorage.GetFullList();
             }
-            if (model.Id.HasValue)
+            if (model.Id.HasValue || model.Login != null)
             {
                 return new List<DoctorViewModel> { _doctorStorage.GetElement(model) };
             }

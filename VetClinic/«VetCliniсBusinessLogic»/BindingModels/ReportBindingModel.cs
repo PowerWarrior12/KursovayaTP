@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _VetCliniсBusinessLogic_.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace _VetCliniсBusinessLogic_.BindingModels

@@ -11,7 +11,7 @@ namespace _VetCliniсBusinessLogic_.ViewModels
         public decimal Sum { get; set; }
         [DisplayName("Дата оплаты")]
         public DateTime DatePayment { get; set; }
-        public Dictionary<string, (int, int)> MedicinesPurchases { get; set; }
+        public Dictionary<int, (string, int, int)> MedicinesPurchases { get; set; }
         public List<string> AnimalsPurchases { get; set; }
         public override string ToString()
         {

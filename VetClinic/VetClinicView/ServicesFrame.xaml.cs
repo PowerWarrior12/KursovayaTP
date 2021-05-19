@@ -26,13 +26,13 @@ namespace VetClinicView
         {
             try
             {
-                var list = logic.Read(null);
+                int x = App.DoctorId;
+                var list = logic.Read(new ServiceBindingModel { DoctorId = App.DoctorId });
                 if (list != null)
                 {
                     dataGridView.ItemsSource = list;
                     dataGridView.ColumnWidth = DataGridLength.Auto;
                     var columns = dataGridView.Columns;
-                    //dataGridView.Columns[1].Visibility = Visibility.Collapsed;
                 }
             }
             catch (Exception ex)

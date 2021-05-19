@@ -74,19 +74,13 @@ namespace VetClinicView
                MessageBoxImage.Error);
                 return;
             }
-            if (FIOComboBox.SelectedItem == null) 
-            {
-                MessageBox.Show("Укажите врача", "Ошибка", MessageBoxButton.OK,
-   MessageBoxImage.Error);
-                return;
-            }
             try
             {
                 servic_logic.CreateOrUpdate(new ServiceBindingModel
                 {
                     Id = id,
                     ServiceName = NameTextBox.Text,
-                    DoctorId = (int)((DoctorViewModel)FIOComboBox.SelectedItem).Id,
+                    DoctorId = App.DoctorId,
                     Cost = int.Parse(CostTextBox.Text),
                     Medications = serviceMedications
                 });
@@ -130,7 +124,6 @@ namespace VetClinicView
         private void ServiceFrame_Load(object sender, RoutedEventArgs e)
         {
             var FIOsource = doctor_logic.Read(null);
-            FIOComboBox.ItemsSource = FIOsource;
             if (id.HasValue)
             {
                 try
@@ -142,7 +135,6 @@ namespace VetClinicView
                     serviceMedications = view.Medications;
                     NameTextBox.Text = view.ServiceName;
                     CostTextBox.Text = view.Cost.ToString();
-                    FIOComboBox.SelectedIndex = FIOsource.IndexOf(FIOsource.FirstOrDefault(d => d.FIO == view.FIO));
                 }
                 catch (Exception ex)
                 {

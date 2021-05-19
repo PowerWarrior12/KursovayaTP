@@ -163,6 +163,7 @@
   <ItemGroup>
     <Compile Include="Implements\MedicationStorage.cs" />
     <Compile Include="Implements\MedicineStorage.cs" />
+    <Compile Include="Implements\MessageInfoStorage.cs" />
     <Compile Include="Implements\PurchaseStorage.cs" />
     <Compile Include="Implements\ServiceStorage.cs" />
     <Compile Include="Implements\DoctorStorage.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Modules\Animal.cs" />
     <Compile Include="Modules\AnimalPurchase.cs" />
     <Compile Include="Modules\AnimalVisit.cs" />
+    <Compile Include="Modules\MessageInfo.cs" />
     <Compile Include="Modules\User.cs" />
     <Compile Include="Modules\Visit.cs" />
     <Compile Include="Modules\VisitService.cs" />

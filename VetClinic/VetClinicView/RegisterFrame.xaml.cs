@@ -46,6 +46,7 @@ namespace VetClinicView
                     Password = PasswordTextBox.Text,
                     FIO = FIOTextBox.Text
                 });
+                App.DoctorId = (int)logic.Read(new DoctorBindingModel { Login = LoginTextBox.Text })[0].Id;
                 MessageBox.Show("Регистрация прошла успешно", "Сообщение");
                 var form = Container.Resolve<MainFrame>();
                 Close();

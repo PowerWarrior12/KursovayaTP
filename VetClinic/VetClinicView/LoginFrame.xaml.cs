@@ -40,6 +40,8 @@ namespace VetClinicView
                     Login = LoginTextBox.Text,
                     Password = PasswordTextBox.Text,
                 });
+                var x = logic.Read(new DoctorBindingModel { Login = LoginTextBox.Text });
+                App.DoctorId = (int)logic.Read(new DoctorBindingModel { Login = LoginTextBox.Text})[0].Id;
                 var form = Container.Resolve<MainFrame>();
                 Close();
                 form.ShowDialog();

@@ -9,5 +9,6 @@ namespace _VetCliniсBusinessLogic_.ViewModels
         public DateTime Date { get; set; }
         public string ServiceName { get; set; }
         public string MedicineName { get; set; }
+        public int MedicineCount { get; set; }
     }
 }

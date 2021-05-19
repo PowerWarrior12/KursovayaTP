@@ -12,6 +12,7 @@ namespace VetClinicView
     /// </summary>
     public partial class App : Application
     {
+        public static int DoctorId;
         private void App_Startup(object sender, StartupEventArgs e)
         {
             var container = BuildUnityContainer();
@@ -33,6 +34,8 @@ namespace VetClinicView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IPurchaseStorage, PurchaseStorage>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IMessageInfoStorage, MessageInfoStorage>(new
+HierarchicalLifetimeManager());
             currentContainer.RegisterType<MedicationBusinessLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MedicineBusinessLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ServiceBusinessLogic>(new HierarchicalLifetimeManager());
@@ -40,6 +43,7 @@ namespace VetClinicView
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<VisitBusinessLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<PurchaseLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<MailLogic>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }

@@ -10,5 +10,7 @@ namespace _VetCliniсBusinessLogic_.BindingModels
         public DateTime DateVisit { get; set; }
         public Dictionary<int, string> AnimalsVisits { get; set; }
         public Dictionary<int, string> ServicesVisits { get; set; }
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
     }
 }

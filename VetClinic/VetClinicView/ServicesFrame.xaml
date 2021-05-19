@@ -13,7 +13,12 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Margin="5,5,5,5" Padding="3,3,3,3"  BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
-            <DataGrid x:Name="dataGridView" AutoGenerateColumns="True">
+            <DataGrid x:Name="dataGridView" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=ServiceName}" Width="*"/>
+                    <DataGridTextColumn Header="Ответственный" Binding="{Binding Path=FIO}" Width="*"/>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Path=Cost}" Width="*"/>
+                </DataGrid.Columns>
             </DataGrid>
         </Border>
         <StackPanel Grid.Column="2" Orientation="Vertical">

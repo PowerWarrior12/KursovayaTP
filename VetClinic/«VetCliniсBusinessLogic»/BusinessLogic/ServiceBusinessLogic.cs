@@ -19,6 +19,10 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
             {
                 return _serviceStorage.GetFullList();
             }
+            if (model.DoctorId.HasValue)
+            {
+                return _serviceStorage.GetFilteredList(model);
+            }
             if (model.Id.HasValue)
             {
                 return new List<ServiceViewModel> { _serviceStorage.GetElement(model) };

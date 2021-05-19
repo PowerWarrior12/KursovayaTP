@@ -7,5 +7,6 @@ namespace _VetCliniсBusinessLogic_.Interfaces
     public interface IPurchaseStorage
     {
         List<PurchaseViewModel> GetFullList();
+        List<PurchaseViewModel> GetFilteredList(PurchaseBindingModel model);
     }
 }

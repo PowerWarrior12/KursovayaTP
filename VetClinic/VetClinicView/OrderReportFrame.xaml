@@ -29,11 +29,12 @@
                 <Button x:Name="ButtonMail" Grid.Column="5" Margin="10,10,10,10" Padding="3,3,3,3" Click="ButtonMail_Click">На почту</Button>
             </Grid>
             <Border Grid.Row="1" Margin="5,5,5,5" Padding="3,3,3,3"  BorderBrush="Black" BorderThickness="1">
-                <DataGrid x:Name="DataGridView">
+                <DataGrid x:Name="DataGridView" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn/>
-                        <DataGridTextColumn/>
-                        <DataGridTextColumn/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Path=Date, StringFormat=dd.MM.yyyy}" Width="*"/>
+                        <DataGridTextColumn Header="Услуга" Binding="{Binding Path=ServiceName}" Width="*"/>
+                        <DataGridTextColumn Header="Лекарство" Binding="{Binding Path=MedicineName}" Width="*"/>
+                        <DataGridTextColumn Header="Количество лекарств" Binding="{Binding Path=MedicineCount}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>

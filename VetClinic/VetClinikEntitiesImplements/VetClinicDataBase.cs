@@ -26,5 +26,6 @@ namespace VetClinikEntitiesImplements
         public virtual DbSet<Purchase> Purchases { set; get; }
         public virtual DbSet<MedicinePurchase> MedicinesPurchases { set; get; }
         public virtual DbSet<AnimalPurchase> AnimalsPurchases { set; get; }
+        public virtual DbSet<MessageInfo> MessageInfos { set; get; }
     }
 }

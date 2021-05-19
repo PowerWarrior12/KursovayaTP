@@ -72,19 +72,6 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                                 JustificationValues = JustificationValues.Both
                             }
                         })); ;
-                        foreach (string medication in medicineMedication.Medications) 
-                        {
-                            docBody.AppendChild(CreateParagraph(new WordParagraph
-                            {
-                                Texts = new List<(string, WordTextProperties)> {
-                                ("\t" + medication, new WordTextProperties {Bold = false, Size = "24", })},
-                                TextProperties = new WordTextProperties
-                                {
-                                    Size = "24",
-                                    JustificationValues = JustificationValues.Both
-                                }
-                            })); ;
-                        }
                     }
                     docBody.AppendChild(CreateSectionProperties());
                 }

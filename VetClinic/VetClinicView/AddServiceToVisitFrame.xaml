@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VetClinicView"
         mc:Ignorable="d"
-        Title="AddServiceToVisitFrame" Height="282.05" Width="510.331">
+        Title="Привязка услуги к посещению" Height="282.05" Width="510.331">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="96*"/>

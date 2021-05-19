@@ -141,20 +141,6 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                             StyleIndex = 0U
                         });
                         rowIndex++;
-
-                        foreach (var medication in mm.Medications)
-                        {
-                            InsertCellInWorksheet(new ExcelCellParameters
-                            {
-                                Worksheet = worksheetPart.Worksheet,
-                                ShareStringPart = shareStringPart,
-                                ColumnName = "B",
-                                RowIndex = rowIndex,
-                                Text = medication,
-                                StyleIndex = 1U
-                            });
-                            rowIndex++;
-                        }
                     }
                     workbookpart.Workbook.Save();
                 }

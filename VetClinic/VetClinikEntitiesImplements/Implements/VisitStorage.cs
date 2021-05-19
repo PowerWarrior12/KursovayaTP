@@ -38,6 +38,27 @@ namespace VetClinikEntitiesImplements.Implements
             }
         }
 
+        public List<VisitViewModel> GetFilteredList(VisitBindingModel model)
+        {
+            using (var context = new VetClinicDataBase())
+            {
+                return context.Visits
+                .Include(rec => rec.AnimalsVisits)
+                .ThenInclude(rec => rec.Animal)
+                .Include(rec => rec.VisitServices)
+                .ThenInclude(rec => rec.Service)
+                .ToList().Where(rec => rec.DateVisit >= model.DateFrom && rec.DateVisit <= model.DateTo)
+                .Select(rec => new VisitViewModel
+                {
+                    Id = rec.Id,
+                    DateVisit = rec.DateVisit,
+                    AnimalsVisits = rec.AnimalsVisits.ToDictionary(recPC => recPC.AnimalId, recPC => (recPC.Animal?.AnimalName)),
+                    ServicesVisits = rec.VisitServices.ToDictionary(recPC => recPC.ServiceId, recPC => (recPC.Service?.ServiceName))
+                })
+                .ToList();
+            }
+        }
+
         public List<VisitViewModel> GetFullList()
         {
             using (var context = new VetClinicDataBase())

@@ -65,7 +65,7 @@ namespace VetClinikEntitiesImplements.Implements
                 return context.Services
                 .Include(rec => rec.MedicationsServices)
                .ThenInclude(rec => rec.Medication)
-               .Where(rec => rec.ServiceName.Contains(model.ServiceName))
+               .Where(rec => rec.ServiceName.Contains(model.ServiceName) || model.DoctorId == rec.DoctorId)
                .ToList()
                .Select(rec => new ServiceViewModel
                {
@@ -113,7 +113,7 @@ namespace VetClinikEntitiesImplements.Implements
                         {
                             ServiceName = model.ServiceName,
                             Cost = model.Cost,
-                            DoctorId = model.DoctorId
+                            DoctorId = (int)model.DoctorId
                         };
                         context.Services.Add(p);
                         context.SaveChanges();
@@ -159,7 +159,7 @@ namespace VetClinikEntitiesImplements.Implements
         private Service CreateModel(ServiceBindingModel model, Service service, VetClinicDataBase context)
         {
             service.ServiceName = model.ServiceName;
-            service.DoctorId = model.DoctorId;
+            service.DoctorId = (int)model.DoctorId;
             service.Cost = model.Cost;
             if (model.Id.HasValue)
             {
