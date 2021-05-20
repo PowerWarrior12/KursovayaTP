@@ -36,7 +36,8 @@ namespace VetClinicView
             {
                 var order = logic.GetServiceMedicine(new ReportBindingModel { 
                     DateFrom = DatePickerFrom.SelectedDate,
-                    DateTo = DatePickerTo.SelectedDate
+                    DateTo = DatePickerTo.SelectedDate,
+                    DoctorId = App.DoctorId
                 });
                 if (order != null)
                 {
@@ -78,7 +79,8 @@ namespace VetClinicView
                 {
                     FileName = file,
                     DateFrom = DatePickerFrom.SelectedDate,
-                    DateTo = DatePickerTo.SelectedDate
+                    DateTo = DatePickerTo.SelectedDate,
+                    DoctorId = App.DoctorId
                 });
                 Attachment attach = new Attachment(file, MediaTypeNames.Application.Octet);
                 ContentDisposition disposition = attach.ContentDisposition;

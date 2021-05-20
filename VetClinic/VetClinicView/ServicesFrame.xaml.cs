@@ -26,7 +26,6 @@ namespace VetClinicView
         {
             try
             {
-                int x = App.DoctorId;
                 var list = logic.Read(new ServiceBindingModel { DoctorId = App.DoctorId });
                 if (list != null)
                 {

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VetClinicView"
         mc:Ignorable="d"
-        Title="Главное меню" Height="450" Width="800">
-    <Grid>
+        Title="Главное меню" Height="450" Width="1100">
+    <Grid Margin="0,0,0,-58">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="13*"/>
             <ColumnDefinition Width="41*"/>
@@ -19,6 +19,8 @@
             <MenuItem x:Name="MedicineListItem" Header="Получение списка лекарств" Click="MedicineListItem_Click"></MenuItem>
             <MenuItem x:Name="MedicineServiceReportItem" Header="Получение отчёта по лекарствам и услугам" Click="MedicineServiceReportItem_Click"></MenuItem>
             <MenuItem x:Name="AddServiceToVisitItem" Header="Привязать услугу" Click="AddServiceToVisitItem_Click"></MenuItem>
+            <MenuItem x:Name="Statistics" Header="Статистика по услугам" Click="Staticstics_Click"></MenuItem>
+            <MenuItem x:Name="StatisticsMedicines" Header="Статистика по лекарствам" Click="StatisticsMedicines_Click"></MenuItem>
         </Menu>
         <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="2" Margin="260,196,368,197">Логотип</Label>
     </Grid>

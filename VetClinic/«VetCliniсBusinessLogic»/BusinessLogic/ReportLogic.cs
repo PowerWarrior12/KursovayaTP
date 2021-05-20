@@ -12,15 +12,17 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
     {
         private readonly IMedicationStorage _medicationStorage;
         private readonly IMedicineStorage _medicineStorage;
+        private readonly IServiceStorage _serviceStorage;
         private readonly IVisitStorage _visitStorage;
         private readonly IPurchaseStorage _purchaseStorage;
         public ReportLogic(IMedicationStorage medicationStorage, IMedicineStorage
-       medicineStorage, IVisitStorage visitStorage, IPurchaseStorage purchaseStorage)
+       medicineStorage, IVisitStorage visitStorage, IPurchaseStorage purchaseStorage, IServiceStorage serviceStorage)
         {
             _medicationStorage = medicationStorage;
             _medicineStorage = medicineStorage;
             _visitStorage = visitStorage;
             _purchaseStorage = purchaseStorage;
+            _serviceStorage = serviceStorage;
         }
         /// <summary>
         /// Получение списка компонент с указанием, в каких изделиях используются
@@ -63,23 +65,25 @@ namespace _VetCliniсBusinessLogic_.BusinessLogic
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             });
-            var visits = _visitStorage.GetFilteredList(new VisitBindingModel
-            {
-                DateFrom = model.DateFrom,
-                DateTo = model.DateTo
-            });
+            var services = _serviceStorage.GetFilteredList(new ServiceBindingModel 
+            { 
+                DoctorId = model.DoctorId
+            }).Select(service => service.Id).ToList();
             var list = new List<ReportServiceMedicineViewModel>();
             foreach (var purchace in purchaces)
             {
                 foreach (var medicine in purchace.MedicinesPurchases)
                 {
-                    var selectedvisits = visits.Where(rec => rec.DateVisit.Date == purchace.DatePayment.Date).ToList();
+                    var selectedvisits = _visitStorage.GetFilteredList(new VisitBindingModel
+                    {
+                        DateVisit = purchace.DatePayment
+                    });
                     foreach (var visit in selectedvisits)
                     {
-                        var report = visit.ServicesVisits.Values.Select(s => new ReportServiceMedicineViewModel
+                        var report = visit.ServicesVisits.Where(sv => services.Contains(sv.Key)).Select(s => new ReportServiceMedicineViewModel
                         {
                             Date = visit.DateVisit.Date,
-                            ServiceName = s,
+                            ServiceName = s.Value,
                             MedicineName = medicine.Value.Item1,
                             MedicineCount = medicine.Value.Item2
                         }).ToList();

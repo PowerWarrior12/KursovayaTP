@@ -47,7 +47,7 @@ namespace VetClinikEntitiesImplements.Implements
                 .ThenInclude(rec => rec.Animal)
                 .Include(rec => rec.VisitServices)
                 .ThenInclude(rec => rec.Service)
-                .ToList().Where(rec => rec.DateVisit >= model.DateFrom && rec.DateVisit <= model.DateTo)
+                .ToList().Where(rec => (rec.DateVisit >= model.DateFrom && rec.DateVisit <= model.DateTo) || (rec.DateVisit.Date == model.DateVisit.Date))
                 .Select(rec => new VisitViewModel
                 {
                     Id = rec.Id,

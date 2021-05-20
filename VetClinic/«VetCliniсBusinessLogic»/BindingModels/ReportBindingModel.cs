@@ -10,5 +10,6 @@ namespace _VetCliniсBusinessLogic_.BindingModels
         public List<int> Medications { get; set; }
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
+        public int DoctorId { get; set; }
     }
 }

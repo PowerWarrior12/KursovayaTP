@@ -53,5 +53,17 @@ namespace VetClinicView
             var form = Container.Resolve<AddServiceToVisitFrame>();
             form.ShowDialog();
         }
+
+        private void Staticstics_Click(object sender, RoutedEventArgs e)
+        {
+            var form = Container.Resolve<StatisticsFrame>();
+            form.ShowDialog();
+        }
+
+        private void StatisticsMedicines_Click(object sender, RoutedEventArgs e)
+        {
+            var form = Container.Resolve<StatisticsMedicineFrame>();
+            form.ShowDialog();
+        }
     }
 }

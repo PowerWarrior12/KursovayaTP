@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VetClinicView"
         mc:Ignorable="d"
-        Title="MedicinesReportFrame" Height="450" Width="800" Loaded="MedicinesReportFrame_Load">
+        Title="Отчёт по лекарствам" Height="450" Width="800" Loaded="MedicinesReportFrame_Load">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"></RowDefinition>

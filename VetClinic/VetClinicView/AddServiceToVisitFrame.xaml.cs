@@ -28,7 +28,7 @@ namespace VetClinicView
         {
             try
             {
-                ServiceComboBox.ItemsSource = servic_logic.Read(null);
+                ServiceComboBox.ItemsSource = servic_logic.Read(new ServiceBindingModel { DoctorId = App.DoctorId });
                 VisitComboBox.ItemsSource = visit_logic.Read(null);
             }
             catch (Exception ex)

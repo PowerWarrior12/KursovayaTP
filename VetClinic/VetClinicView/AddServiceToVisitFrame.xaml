@@ -21,11 +21,11 @@
         <Label Grid.Row="0" Grid.ColumnSpan="2">
             <TextBlock>Выбранное посещение:</TextBlock>
         </Label>
-        <ComboBox x:Name="VisitComboBox" Grid.Row="1" Margin="8,8,8,8" Grid.ColumnSpan="2"></ComboBox>
+        <ComboBox x:Name="VisitComboBox" Grid.Row="1" Margin="8,8,8,8" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="300"></ComboBox>
         <Label Grid.Row="2" Grid.ColumnSpan="2">
             <TextBlock>Выбранная услуга:</TextBlock>
         </Label>
-        <ComboBox x:Name="ServiceComboBox" Grid.Row="3" Margin="8,8,8,8" Grid.ColumnSpan="2"></ComboBox>
+        <ComboBox x:Name="ServiceComboBox" Grid.Row="3" Margin="8,8,8,8" Grid.ColumnSpan="2" MaxHeight="30" MaxWidth="300"></ComboBox>
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
